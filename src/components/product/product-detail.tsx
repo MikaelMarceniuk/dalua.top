@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ChevronDown, ChevronUp, Minus, Plus } from 'lucide-react'
+import { ChevronDown, Minus, Plus } from 'lucide-react'
 import { type Product, useStore } from '@/lib/store'
 
 interface AccordionProps {
@@ -18,16 +18,24 @@ function Accordion({ title, children }: AccordionProps) {
     <div className="border-t border-border">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between py-5 text-left group"
+        className="group flex w-full items-center justify-between py-5 text-left"
         aria-expanded={open}
       >
-        <span className="text-xs tracking-[0.12em] uppercase font-medium text-foreground">
+        <span className="text-xs font-medium tracking-[0.12em] text-foreground uppercase">
           {title}
         </span>
         {open ? (
-          <ChevronDown size={16} strokeWidth={1.5} className="text-muted-foreground" />
+          <ChevronDown
+            size={16}
+            strokeWidth={1.5}
+            className="text-muted-foreground"
+          />
         ) : (
-          <ChevronDown size={16} strokeWidth={1.5} className="text-muted-foreground rotate-[-90deg] transition-transform" />
+          <ChevronDown
+            size={16}
+            strokeWidth={1.5}
+            className="rotate-[-90deg] text-muted-foreground transition-transform"
+          />
         )}
       </button>
       {open && (
@@ -55,24 +63,28 @@ export default function ProductDetail({ product }: Props) {
   }
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 py-10">
+    <div className="mx-auto max-w-[1200px] px-6 py-10">
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-[10px] tracking-[0.1em] uppercase text-muted-foreground mb-10">
-        <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+      <nav className="mb-10 flex items-center gap-2 text-[10px] tracking-[0.1em] text-muted-foreground uppercase">
+        <Link href="/" className="transition-colors hover:text-foreground">
+          Home
+        </Link>
         <span>/</span>
-        <Link href="/" className="hover:text-foreground transition-colors">Shop All</Link>
+        <Link href="/" className="transition-colors hover:text-foreground">
+          Shop All
+        </Link>
         <span>/</span>
         <span className="text-foreground">{product.name.toUpperCase()}</span>
       </nav>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+      <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
         {/* Image */}
         <div className="relative">
-          <div className="relative aspect-[4/5] bg-[#f3f0eb] overflow-hidden">
+          <div className="relative aspect-[4/5] overflow-hidden bg-[#f3f0eb]">
             {product.tags.map((tag) => (
               <span
                 key={tag}
-                className="absolute top-4 left-4 z-10 text-[10px] tracking-[0.1em] uppercase border border-foreground/30 px-2.5 py-1 bg-background text-foreground"
+                className="absolute top-4 left-4 z-10 border border-foreground/30 bg-background px-2.5 py-1 text-[10px] tracking-[0.1em] text-foreground uppercase"
               >
                 {tag}
               </span>
@@ -89,31 +101,33 @@ export default function ProductDetail({ product }: Props) {
 
         {/* Details */}
         <div className="flex flex-col">
-          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-3 text-pretty">
+          <h1 className="mb-3 text-3xl font-semibold tracking-tight text-pretty text-foreground md:text-4xl">
             {product.subtitle || product.name}
           </h1>
-          <p className="text-xl font-medium text-foreground mb-6">
+          <p className="mb-6 text-xl font-medium text-foreground">
             ${product.price.toFixed(2)}
           </p>
-          <p className="text-sm leading-relaxed text-muted-foreground mb-8">
+          <p className="mb-8 text-sm leading-relaxed text-muted-foreground">
             {product.description}
           </p>
 
           {/* Quantity + Add to Cart */}
-          <div className="flex items-center gap-4 mb-10">
+          <div className="mb-10 flex items-center gap-4">
             {/* Quantity stepper */}
-            <div className="flex items-center border border-border h-12 rounded-sm">
+            <div className="flex h-12 items-center rounded-sm border border-border">
               <button
                 onClick={() => setQty((q) => Math.max(1, q - 1))}
-                className="w-12 h-full flex items-center justify-center text-foreground hover:bg-secondary transition-colors"
+                className="flex h-full w-12 items-center justify-center text-foreground transition-colors hover:bg-secondary"
                 aria-label="Decrease quantity"
               >
                 <Minus size={14} strokeWidth={1.5} />
               </button>
-              <span className="w-10 text-center text-sm text-foreground">{qty}</span>
+              <span className="w-10 text-center text-sm text-foreground">
+                {qty}
+              </span>
               <button
                 onClick={() => setQty((q) => q + 1)}
-                className="w-12 h-full flex items-center justify-center text-foreground hover:bg-secondary transition-colors"
+                className="flex h-full w-12 items-center justify-center text-foreground transition-colors hover:bg-secondary"
                 aria-label="Increase quantity"
               >
                 <Plus size={14} strokeWidth={1.5} />
@@ -123,7 +137,7 @@ export default function ProductDetail({ product }: Props) {
             {/* Add to cart */}
             <button
               onClick={handleAdd}
-              className="flex-1 h-12 bg-[#8daa91] hover:bg-[#7d9a81] text-white text-xs tracking-[0.14em] uppercase transition-colors rounded-sm"
+              className="h-12 flex-1 rounded-sm bg-[#8daa91] text-xs tracking-[0.14em] text-white uppercase transition-colors hover:bg-[#7d9a81]"
             >
               {added ? 'Added to Bag' : 'Add to Cart'}
             </button>
@@ -137,7 +151,7 @@ export default function ProductDetail({ product }: Props) {
               <ul className="flex flex-col gap-2">
                 {product.benefits.map((b) => (
                   <li key={b} className="flex items-start gap-2">
-                    <span className="mt-1.5 w-1 h-1 rounded-full bg-[#8daa91] shrink-0" />
+                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#8daa91]" />
                     {b}
                   </li>
                 ))}
@@ -153,7 +167,7 @@ export default function ProductDetail({ product }: Props) {
               <div className="flex flex-col gap-4">
                 {product.faq.map(({ q, a }) => (
                   <div key={q}>
-                    <p className="font-medium text-foreground mb-1">{q}</p>
+                    <p className="mb-1 font-medium text-foreground">{q}</p>
                     <p>{a}</p>
                   </div>
                 ))}

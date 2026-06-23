@@ -10,7 +10,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Lumina — Artisanal Haircare',
-  description: 'Clean formulas for effortless, radiant hair. Lumina Artisanal Haircare — Your Ritual, Redefined.',
+  description:
+    'Clean formulas for effortless, radiant hair. Lumina Artisanal Haircare — Your Ritual, Redefined.',
   keywords: ['haircare', 'artisanal', 'botanical', 'luxury', 'clean beauty'],
 }
 
@@ -21,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} bg-background`}>
-      <body className="font-sans antialiased text-foreground bg-background">
+      <body className="bg-background font-sans text-foreground antialiased">
         {children}
       </body>
     </html>

@@ -44,7 +44,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
         return prev.map((item) =>
           item.product.id === product.id
             ? { ...item, quantity: item.quantity + quantity }
-            : item,
+            : item
         )
       }
       return [...prev, { product, quantity }]
@@ -61,15 +61,15 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     } else {
       setCart((prev) =>
         prev.map((item) =>
-          item.product.id === productId ? { ...item, quantity } : item,
-        ),
+          item.product.id === productId ? { ...item, quantity } : item
+        )
       )
     }
   }, [])
 
   const cartTotal = cart.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
-    0,
+    0
   )
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)

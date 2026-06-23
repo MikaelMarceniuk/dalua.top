@@ -6,7 +6,9 @@
     "start:dev": "next dev",
     "start:prd": "next start",
     "build": "next build",
-    "lint": "eslint ."
+    "lint": "eslint",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -26,7 +28,11 @@
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "eslint": "9",
+    "eslint-config-next": "^16.2.9",
     "postcss": "^8.5",
+    "prettier": "^3.8.4",
+    "prettier-plugin-tailwindcss": "^0.8.0",
     "tailwindcss": "^4.2.0",
     "typescript": "5.7.3"
   }
