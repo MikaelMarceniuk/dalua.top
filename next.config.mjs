@@ -6,6 +6,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  allowedDevOrigins: ['dalua-dev.mmarceniuk.dev'],
 }
 
 export default nextConfig

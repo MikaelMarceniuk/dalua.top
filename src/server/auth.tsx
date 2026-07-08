@@ -4,9 +4,7 @@ import { nextCookies } from 'better-auth/next-js'
 import { db } from '@/server/db'
 import * as schema from '@/server/db/schemas'
 import { resend } from './providers/email.provider'
-import VerifyEmailTemplate, {
-  VerifyEmailTemplateId,
-} from './emails/verify-email.template'
+import VerifyEmailTemplate from './emails/verify-email.template'
 
 export const auth = betterAuth({
   plugins: [nextCookies()],
