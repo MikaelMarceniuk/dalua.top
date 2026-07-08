@@ -1,4 +1,6 @@
+import { relations } from 'drizzle-orm'
 import { pgTable, text, timestamp, boolean, index } from 'drizzle-orm/pg-core'
+import { orders } from './order.schema'
 
 export const user = pgTable('user', {
   id: text('id').primaryKey(),
@@ -11,6 +13,12 @@ export const user = pgTable('user', {
     .$onUpdate(() => new Date())
     .notNull(),
 })
+
+export const userRelations = relations(user, ({ many }) => ({
+  sessions: many(session),
+  accounts: many(account),
+  orders: many(orders),
+}))
 
 export const session = pgTable(
   'session',
@@ -30,6 +38,13 @@ export const session = pgTable(
   },
   (t) => [index('session_userId_idx').on(t.userId)]
 )
+
+export const sessionRelations = relations(session, ({ one }) => ({
+  user: one(user, {
+    fields: [session.userId],
+    references: [user.id],
+  }),
+}))
 
 export const account = pgTable(
   'account',
@@ -69,3 +84,10 @@ export const verification = pgTable(
   },
   (t) => [index('verification_identifier_idx').on(t.identifier)]
 )
+
+export const accountRelations = relations(account, ({ one }) => ({
+  user: one(user, {
+    fields: [account.userId],
+    references: [user.id],
+  }),
+}))
