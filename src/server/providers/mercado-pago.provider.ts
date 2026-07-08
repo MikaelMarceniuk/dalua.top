@@ -6,7 +6,7 @@ import {
   WebhookResult,
 } from '../interfaces/payment-provider.interface'
 
-const mp = new MercadoPagoConfig({
+export const mp = new MercadoPagoConfig({
   accessToken: process.env.MP_ACCESS_TOKEN!,
   options: { timeout: 5000 },
 })
@@ -26,6 +26,7 @@ export class MercadoPagoProvider implements PaymentProvider {
           pending: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/pending`,
         },
         auto_return: 'approved',
+        notification_url: `${process.env.NEXT_PUBLIC_APP_URL}/api/webhooks/mercado-pago`,
         expires: true,
         expiration_date_to: new Date(Date.now() + 30 * 60 * 1000).toISOString(), // 30 min
         items: input.items.map((item) => ({
