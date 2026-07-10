@@ -17,7 +17,6 @@ import {
 } from '@/components/ui/sidebar'
 import {
   IconDashboard,
-  IconListDetails,
   IconChartBar,
   IconFolder,
   IconUsers,
@@ -31,6 +30,7 @@ import {
   IconReport,
   IconFileWord,
   IconInnerShadowTop,
+  IconPackage,
 } from '@tabler/icons-react'
 
 const data = {
@@ -42,13 +42,13 @@ const data = {
   navMain: [
     {
       title: 'Dashboard',
-      url: '#',
+      url: '/dashboard',
       icon: <IconDashboard />,
     },
     {
-      title: 'Lifecycle',
-      url: '#',
-      icon: <IconListDetails />,
+      title: 'Product',
+      url: '/product',
+      icon: <IconPackage />,
     },
     {
       title: 'Analytics',
