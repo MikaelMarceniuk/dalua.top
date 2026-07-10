@@ -9,16 +9,17 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 import { IconCirclePlusFilled, IconMail } from '@tabler/icons-react'
+import Link from 'next/link'
 
-export function NavMain({
-  items,
-}: {
+type NavMainProps = {
   items: {
     title: string
     url: string
     icon?: React.ReactNode
   }[]
-}) {
+}
+
+export const NavMain: React.FC<NavMainProps> = ({ items }) => {
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
@@ -44,9 +45,11 @@ export function NavMain({
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton tooltip={item.title}>
-                {item.icon}
-                <span>{item.title}</span>
+              <SidebarMenuButton tooltip={item.title} asChild>
+                <Link href={item.url}>
+                  {item.icon}
+                  <span>{item.title}</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
