@@ -2,14 +2,33 @@
   "name": "@dalua.top/server",
   "version": "1.0.50",
   "scripts": {
-    "start:dev": "bun run --watch src/index.ts"
+    "start:dev": "bun run --watch src/index.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@elysiajs/openapi": "^1.4.15",
+    "@react-email/render": "^2.0.10",
+    "@react-email/tailwind": "^2.0.7",
     "better-auth": "^1.6.23",
-    "elysia": "1.4.29"
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^1.0.0-rc.4",
+    "elysia": "1.4.29",
+    "pg": "^8.22.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-email": "^6.6.9",
+    "resend": "^6.17.2",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@types/pg": "^8.20.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "bun-types": "latest",
+    "drizzle-kit": "^1.0.0-rc.4",
+    "tsx": "^4.23.0"
   },
   "module": "src/index.js"
 }
