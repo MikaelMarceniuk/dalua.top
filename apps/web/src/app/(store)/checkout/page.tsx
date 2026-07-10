@@ -1,29 +1,29 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { useStore } from "@/components/store/providers/store.provider"
+import { useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useStore } from '@/components/store/providers/store.provider'
 import {
   IconArrowRight,
   IconLock,
   IconMinus,
   IconPlus,
   IconShoppingBag,
-} from "@tabler/icons-react"
+} from '@tabler/icons-react'
 
 const SHIPPING_OPTIONS = [
-  { id: "home", label: "Home", address: "123 Serenity Lane, NY 10001" },
+  { id: 'home', label: 'Home', address: '123 Serenity Lane, NY 10001' },
   {
-    id: "atelier",
-    label: "Atelier Pickup",
-    address: "456 Artisan Blvd, NY 10012",
+    id: 'atelier',
+    label: 'Atelier Pickup',
+    address: '456 Artisan Blvd, NY 10012',
   },
 ]
 
 export default function CheckoutPage() {
   const { cart, removeFromCart, updateQuantity, cartTotal } = useStore()
-  const [shipping, setShipping] = useState("home")
+  const [shipping, setShipping] = useState('home')
 
   if (cart.length === 0) {
     return (
@@ -158,8 +158,8 @@ export default function CheckoutPage() {
                     key={opt.id}
                     className={`flex cursor-pointer items-start gap-3 border p-4 transition-colors ${
                       shipping === opt.id
-                        ? "border-foreground"
-                        : "border-border hover:border-foreground/40"
+                        ? 'border-foreground'
+                        : 'border-border hover:border-foreground/40'
                     }`}
                   >
                     <input

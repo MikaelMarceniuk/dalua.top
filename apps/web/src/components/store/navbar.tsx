@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { useStore } from "./providers/store.provider"
-import { IconShoppingBag, IconUser } from "@tabler/icons-react"
+import Link from 'next/link'
+import { useStore } from './providers/store.provider'
+import { IconShoppingBag, IconUser } from '@tabler/icons-react'
 
 export const Navbar = () => {
   const { cartCount } = useStore()

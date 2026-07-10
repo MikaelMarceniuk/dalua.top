@@ -1,11 +1,11 @@
-import Link from "next/link"
+import Link from 'next/link'
 
 const FOOTER_LINKS = [
-  { label: "Sustainability", href: "/sustainability" },
-  { label: "Ingredients", href: "/ingredients" },
-  { label: "Shipping", href: "/shipping" },
-  { label: "Terms", href: "/terms" },
-  { label: "Newsletter", href: "/newsletter" },
+  { label: 'Sustainability', href: '/sustainability' },
+  { label: 'Ingredients', href: '/ingredients' },
+  { label: 'Shipping', href: '/shipping' },
+  { label: 'Terms', href: '/terms' },
+  { label: 'Newsletter', href: '/newsletter' },
 ]
 
 export default function Footer() {
@@ -43,10 +43,10 @@ export function CheckoutFooter() {
         </span>
         <div className="flex gap-6">
           {[
-            "Sustainability",
-            "Shipping & Returns",
-            "Privacy Policy",
-            "Contact",
+            'Sustainability',
+            'Shipping & Returns',
+            'Privacy Policy',
+            'Contact',
           ].map((item) => (
             <Link
               key={item}

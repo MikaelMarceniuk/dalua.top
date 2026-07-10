@@ -1,6 +1,6 @@
-import Link from "next/link"
-import Image from "next/image"
-import { PRODUCTS } from "@/mock/product.mock"
+import Link from 'next/link'
+import Image from 'next/image'
+import { PRODUCTS } from '@/mock/product.mock'
 
 export const CatalogSection = () => {
   return (
@@ -46,8 +46,8 @@ export const CatalogSection = () => {
                 </h3>
                 <p className="mb-3 text-sm text-muted-foreground">
                   {i === 0
-                    ? "Defines and hydrates with botanical squalane."
-                    : "Seals split ends and imparts glass-like shine."}
+                    ? 'Defines and hydrates with botanical squalane.'
+                    : 'Seals split ends and imparts glass-like shine.'}
                 </p>
                 <span className="border-b border-foreground/40 pb-0.5 text-xs tracking-widest text-foreground uppercase transition-colors hover:border-foreground">
                   Discover More

@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { cn } from '@/lib/utils'
 import {
   IconClipboardList,
   IconCreditCard,
@@ -11,44 +11,44 @@ import {
   IconMapPin,
   IconPlus,
   IconSettings,
-} from "@tabler/icons-react"
+} from '@tabler/icons-react'
 
 const NAV_ITEMS = [
-  { id: "overview", label: "Overview", icon: IconDashboard },
-  { id: "orders", label: "Order History", icon: IconClipboardList },
-  { id: "addresses", label: "Addresses", icon: IconMapPin },
-  { id: "payment", label: "Payment Methods", icon: IconCreditCard },
-  { id: "settings", label: "Settings", icon: IconSettings },
+  { id: 'overview', label: 'Overview', icon: IconDashboard },
+  { id: 'orders', label: 'Order History', icon: IconClipboardList },
+  { id: 'addresses', label: 'Addresses', icon: IconMapPin },
+  { id: 'payment', label: 'Payment Methods', icon: IconCreditCard },
+  { id: 'settings', label: 'Settings', icon: IconSettings },
 ]
 
 const ORDER_STEPS = [
-  { label: "Ordered", done: true },
-  { label: "Shipped", done: true },
-  { label: "Out for Delivery", done: false },
-  { label: "Delivered", done: false },
+  { label: 'Ordered', done: true },
+  { label: 'Shipped', done: true },
+  { label: 'Out for Delivery', done: false },
+  { label: 'Delivered', done: false },
 ]
 
 const ADDRESSES = [
   {
-    id: "home",
-    type: "Home",
-    name: "Sarah Jenkins",
-    line1: "1245 Serenity Lane, Apt 3B",
-    line2: "Portland, OR 97209",
+    id: 'home',
+    type: 'Home',
+    name: 'Sarah Jenkins',
+    line1: '1245 Serenity Lane, Apt 3B',
+    line2: 'Portland, OR 97209',
     primary: true,
   },
   {
-    id: "atelier",
-    type: "Atelier",
-    name: "Sarah Jenkins",
-    line1: "88 Design District Blvd",
-    line2: "Portland, OR 97214",
+    id: 'atelier',
+    type: 'Atelier',
+    name: 'Sarah Jenkins',
+    line1: '88 Design District Blvd',
+    line2: 'Portland, OR 97214',
     primary: false,
   },
 ]
 
 export default function AccountPage() {
-  const [activeNav, setActiveNav] = useState("overview")
+  const [activeNav, setActiveNav] = useState('overview')
 
   return (
     <div className="min-h-screen bg-background">
@@ -70,10 +70,10 @@ export default function AccountPage() {
                   key={id}
                   onClick={() => setActiveNav(id)}
                   className={cn(
-                    "flex w-full items-center gap-3 px-6 py-3 text-left text-sm transition-colors",
+                    'flex w-full items-center gap-3 px-6 py-3 text-left text-sm transition-colors',
                     activeNav === id
-                      ? "border-l-2 border-foreground bg-secondary/40 font-medium text-foreground"
-                      : "border-l-2 text-muted-foreground hover:bg-secondary/20 hover:text-foreground"
+                      ? 'border-l-2 border-foreground bg-secondary/40 font-medium text-foreground'
+                      : 'border-l-2 text-muted-foreground hover:bg-secondary/20 hover:text-foreground'
                   )}
                 >
                   <Icon size={16} strokeWidth={1.5} />
@@ -112,7 +112,7 @@ export default function AccountPage() {
                     <div className="absolute top-3 right-0 left-0 h-px bg-border" />
                     <div
                       className="absolute top-3 left-0 h-px bg-[#8daa91] transition-all"
-                      style={{ width: "35%" }}
+                      style={{ width: '35%' }}
                     />
                     {ORDER_STEPS.map((step) => (
                       <div
@@ -121,10 +121,10 @@ export default function AccountPage() {
                       >
                         <div
                           className={cn(
-                            "flex h-6 w-6 items-center justify-center rounded-full border-2 bg-background",
+                            'flex h-6 w-6 items-center justify-center rounded-full border-2 bg-background',
                             step.done
-                              ? "border-[#8daa91] bg-[#8daa91]"
-                              : "border-border"
+                              ? 'border-[#8daa91] bg-[#8daa91]'
+                              : 'border-border'
                           )}
                         >
                           {step.done && (
@@ -194,10 +194,10 @@ export default function AccountPage() {
                     <label
                       key={addr.id}
                       className={cn(
-                        "flex cursor-pointer items-start gap-3 border p-4 transition-colors",
+                        'flex cursor-pointer items-start gap-3 border p-4 transition-colors',
                         addr.primary
-                          ? "border-foreground"
-                          : "border-border hover:border-foreground/40"
+                          ? 'border-foreground'
+                          : 'border-border hover:border-foreground/40'
                       )}
                     >
                       <input
