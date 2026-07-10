@@ -1,6 +1,0 @@
-export * from './auth.schema'
-export * from './product.schema'
-export * from './product-images.schema'
-export * from './order.schema'
-export * from './order-items.schema'
-export * from './payment.schema'
