@@ -13,7 +13,7 @@
     "@react-email/tailwind": "^2.0.7",
     "better-auth": "^1.6.23",
     "dotenv": "^17.4.2",
-    "drizzle-orm": "^1.0.0-rc.4",
+    "drizzle-orm": "^0.45.2",
     "elysia": "1.4.29",
     "pg": "^8.22.0",
     "react": "^19.2.7",
@@ -27,7 +27,7 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "bun-types": "latest",
-    "drizzle-kit": "^1.0.0-rc.4",
+    "drizzle-kit": "^0.31.10",
     "tsx": "^4.23.0"
   },
   "module": "src/index.js"

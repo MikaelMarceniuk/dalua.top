@@ -1,7 +1,7 @@
 import { integer, pgTable, uuid } from 'drizzle-orm/pg-core'
 import { orders } from './order.schema'
 import { products } from './product.schema'
-import { relations } from 'drizzle-orm/_relations'
+import { relations } from 'drizzle-orm'
 
 export const orderItems = pgTable('order_items', {
   id: uuid('id').primaryKey().defaultRandom(),

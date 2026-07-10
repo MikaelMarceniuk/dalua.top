@@ -7,7 +7,13 @@ import { sendVerificationEmail } from '@/lib/emails/send-verification-email'
 import { env } from './env.config'
 
 export const auth = betterAuth({
-  plugins: [admin(), openAPI()],
+  plugins: [
+    admin({
+      defaultRole: 'client',
+      adminRoles: ['admin'],
+    }),
+    openAPI(),
+  ],
   database: drizzleAdapter(db, {
     provider: 'pg',
     schema: {

@@ -1,6 +1,6 @@
 import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
 import { orders } from './order.schema'
-import { relations } from 'drizzle-orm/_relations'
+import { relations } from 'drizzle-orm'
 
 export const PAYMENT_STATUS = [
   'pending',

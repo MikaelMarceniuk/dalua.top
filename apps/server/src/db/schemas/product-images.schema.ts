@@ -1,6 +1,6 @@
 import { boolean, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
 import { products } from './product.schema'
-import { relations } from 'drizzle-orm/_relations'
+import { relations } from 'drizzle-orm'
 
 export const productImages = pgTable('product_images', {
   id: uuid('id').primaryKey().defaultRandom(),

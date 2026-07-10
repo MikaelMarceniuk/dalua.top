@@ -1,6 +1,6 @@
 import { integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
 import { user } from './auth.schema'
-import { relations } from 'drizzle-orm/_relations'
+import { relations } from 'drizzle-orm'
 import { payments } from './payment.schema'
 
 export const orders = pgTable('orders', {
