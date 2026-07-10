@@ -42,12 +42,12 @@ const data = {
   navMain: [
     {
       title: 'Dashboard',
-      url: '/dashboard',
+      url: '/admin/dashboard',
       icon: <IconDashboard />,
     },
     {
       title: 'Product',
-      url: '/product',
+      url: '/admin/product',
       icon: <IconPackage />,
     },
     {
