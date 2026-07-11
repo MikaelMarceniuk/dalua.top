@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
-import ProductDetail from '@/components/product/product-detail'
 import { PRODUCTS } from '@/mock/product.mock'
+import ProductDetail from '@/components/store/pages/product-slug/product-details'
 
 interface Props {
   params: Promise<{ slug: string }>

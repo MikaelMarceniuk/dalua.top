@@ -1,4 +1,4 @@
-import { StoreProvider } from '@/components/store/providers/store.provider'
+import { StoreProvider } from '@/components/providers/store.provider'
 import Footer from '@/components/store/footer'
 import { Navbar } from '@/components/store/navbar'
 import { withChildren } from '@/types/with-children.type'
