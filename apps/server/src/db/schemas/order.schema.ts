@@ -4,7 +4,9 @@ import { relations } from 'drizzle-orm'
 import { payments } from './payment.schema'
 
 export const orders = pgTable('orders', {
-  id: uuid('id').primaryKey().defaultRandom(),
+  id: uuid('id')
+    .primaryKey()
+    .$defaultFn(() => Bun.randomUUIDv7()),
   totalInCents: integer('total_in_cents').notNull(),
 
   status: text('status', {

@@ -4,7 +4,9 @@ import { products } from './product.schema'
 import { relations } from 'drizzle-orm'
 
 export const orderItems = pgTable('order_items', {
-  id: uuid('id').primaryKey().defaultRandom(),
+  id: uuid('id')
+    .primaryKey()
+    .$defaultFn(() => Bun.randomUUIDv7()),
 
   orderId: uuid('order_id')
     .notNull()

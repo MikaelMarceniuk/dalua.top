@@ -14,7 +14,9 @@ export const PAYMENT_PROVIDER = ['mercado_pago'] as const
 export type PaymentProvider = (typeof PAYMENT_PROVIDER)[number]
 
 export const payments = pgTable('payments', {
-  id: uuid('id').primaryKey().defaultRandom(),
+  id: uuid('id')
+    .primaryKey()
+    .$defaultFn(() => Bun.randomUUIDv7()),
 
   provider: text('provider', { enum: PAYMENT_PROVIDER }).notNull(),
 

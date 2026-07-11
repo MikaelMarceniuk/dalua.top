@@ -11,9 +11,12 @@ import { relations } from 'drizzle-orm'
 import { productImages } from './product-images.schema'
 
 export const products = pgTable('products', {
-  id: uuid('id').primaryKey().defaultRandom(),
+  id: uuid('id')
+    .primaryKey()
+    .$defaultFn(() => Bun.randomUUIDv7()),
 
   name: text('name').notNull(),
+  slug: text('slug').notNull().unique(),
   description: text('description').notNull(),
 
   priceInCents: integer('price_in_cents').notNull(),
