@@ -15,6 +15,27 @@
       "when": 1783698432068,
       "tag": "0001_workable_vulcan",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1783771184944,
+      "tag": "0002_numerous_sabretooth",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1783771244304,
+      "tag": "0003_opposite_rattler",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1783771371603,
+      "tag": "0004_wise_the_anarchist",
+      "breakpoints": true
     }
   ]
 }
