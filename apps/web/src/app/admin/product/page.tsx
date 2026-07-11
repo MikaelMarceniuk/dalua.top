@@ -6,8 +6,8 @@ const ProductPage = () => {
     <main>
       <AppHeader
         items={[
-          { label: 'Dashboard', href: '/dashboard' },
-          { label: 'Product', href: '/product' },
+          { label: 'Dashboard', href: '/admin/dashboard' },
+          { label: 'Product', href: '/admin/product' },
           { label: 'View' },
         ]}
       />
