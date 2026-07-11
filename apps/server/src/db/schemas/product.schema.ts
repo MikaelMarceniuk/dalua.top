@@ -9,6 +9,9 @@ import {
 import { orderItems } from './order-items.schema'
 import { relations } from 'drizzle-orm'
 import { productImages } from './product-images.schema'
+import { productVariants, productVariantTypes } from './product-variant.schema'
+import { productContentBlocks } from './product-content-blocks.schema'
+import { productTranslations } from './locales.schema'
 
 export const products = pgTable('products', {
   id: uuid('id')
@@ -34,6 +37,10 @@ export const products = pgTable('products', {
 export const productsRelations = relations(products, ({ many }) => ({
   orderItems: many(orderItems),
   images: many(productImages),
+  variantTypes: many(productVariantTypes),
+  variants: many(productVariants),
+  contentBlocks: many(productContentBlocks),
+  translations: many(productTranslations),
 }))
 
 export type Product = typeof products.$inferSelect
