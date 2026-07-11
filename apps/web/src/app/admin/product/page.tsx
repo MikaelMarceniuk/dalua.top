@@ -1,7 +1,10 @@
+import { findProductsAction } from '@/components/actions/product/find-products.action'
 import { ProductContent } from '@/components/admin/product/content'
 import { AppHeader } from '@/components/admin/ui/app-header'
 
-const ProductPage = () => {
+const ProductPage = async () => {
+  const products = await findProductsAction()
+
   return (
     <main>
       <AppHeader
@@ -11,7 +14,7 @@ const ProductPage = () => {
           { label: 'View' },
         ]}
       />
-      <ProductContent />
+      <ProductContent products={products} />
     </main>
   )
 }

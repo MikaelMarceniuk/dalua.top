@@ -1,5 +1,6 @@
 'use client'
 
+import { Product } from '@/types/product.type'
 import { DataTable } from '../ui/data-table/data-table'
 import { DataTableFilterConfig } from '../ui/data-table/types'
 import { columns } from './columns'
@@ -23,10 +24,14 @@ const productFilters: DataTableFilterConfig[] = [
   },
 ]
 
-export const ProductContent = () => {
+type ProductContentProps = {
+  products: Product[]
+}
+
+export const ProductContent: React.FC<ProductContentProps> = ({ products }) => {
   return (
     <div className="p-4 lg:p-6">
-      <DataTable columns={columns} data={[]} filters={productFilters} />
+      <DataTable columns={columns} data={products} filters={productFilters} />
     </div>
   )
 }

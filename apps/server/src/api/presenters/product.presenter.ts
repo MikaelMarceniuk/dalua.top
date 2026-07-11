@@ -10,6 +10,7 @@ export const productPresenter = ({
   orderCount,
 }: ProductPresenterParams) => ({
   id: product.id,
+  name: product.name,
   description: product.description,
   priceInCents: product.priceInCents,
   isAvailableForPurchase: product.isAvailableForPurchase,

@@ -7,8 +7,8 @@ import { count, eq, getTableColumns } from 'drizzle-orm'
 import { Elysia, t } from 'elysia'
 
 export const findProductRoute = new Elysia()
-  .use(authPlugin)
-  .use(rolePlugin)
+  // .use(authPlugin)
+  // .use(rolePlugin)
   .use(dbPlugin)
   .get(
     '/',
@@ -28,5 +28,8 @@ export const findProductRoute = new Elysia()
         ),
       }
     },
-    { auth: true, roles: 'admin' },
+    {
+      // auth: true,
+      // roles: 'admin'
+    },
   )

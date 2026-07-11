@@ -22,7 +22,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import type { Product } from './columns'
+import { Product } from '@/types/product.type'
+import { deleteProductAction } from '@/components/actions/product/delete-product.action'
+import { toggleProductVisibilityAction } from '@/components/actions/product/toggle-product-visibility.action'
 
 interface ProductActionsCellProps {
   product: Product
@@ -34,14 +36,14 @@ export const ProductActionsCell: React.FC<ProductActionsCellProps> = ({
   const router = useRouter()
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 
-  const canDelete = !product.hasOrders
+  const canDelete = product.orderCount == 0
 
   const handleDelete = async () => {
-    console.log(`Deleting product "${product.name}"`)
+    await deleteProductAction({ id: product.id })
   }
 
   const handleAvailability = async () => {
-    console.log(`Toggling availability of "${product.name}"`)
+    await toggleProductVisibilityAction({ id: product.id })
   }
 
   return (
@@ -59,12 +61,12 @@ export const ProductActionsCell: React.FC<ProductActionsCellProps> = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-44">
           <DropdownMenuItem
-            onClick={() => router.push(`/products/${product.id}`)}
+            onClick={() => router.push(`/admin/products/${product.id}`)}
           >
             Mais detalhes
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => router.push(`/products/${product.id}/edit`)}
+            onClick={() => router.push(`/admin/products/${product.id}/edit`)}
           >
             Editar
           </DropdownMenuItem>

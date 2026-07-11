@@ -7,8 +7,8 @@ import { count, eq } from 'drizzle-orm'
 import { Elysia, t } from 'elysia'
 
 export const createProductRoute = new Elysia()
-  .use(authPlugin)
-  .use(rolePlugin)
+  // .use(authPlugin)
+  // .use(rolePlugin)
   .use(dbPlugin)
   .post(
     '/',
@@ -30,8 +30,8 @@ export const createProductRoute = new Elysia()
       })
     },
     {
-      auth: true,
-      roles: 'admin',
+      // auth: true,
+      // roles: 'admin',
       body: t.Object({
         name: t.String({ minLength: 3 }),
         description: t.String({ minLength: 3 }),
