@@ -1,9 +1,14 @@
 'use client'
 
+import { Product } from '@/types/product.type'
 import { DataTable } from '../ui/data-table/data-table'
-import { DataTableFilterConfig } from '../ui/data-table/types'
+import {
+  DataTableActionConfig,
+  DataTableFilterConfig,
+} from '../ui/data-table/types'
 import { columns } from './columns'
 import { useFindProducts } from '@/hooks/use-find-products.hook'
+import { IconPlus } from '@tabler/icons-react'
 
 const productFilters: DataTableFilterConfig[] = [
   {
@@ -27,6 +32,14 @@ const productFilters: DataTableFilterConfig[] = [
 export const ProductContent: React.FC = () => {
   const { products, isPending } = useFindProducts()
 
+  const actions: DataTableActionConfig<Product>[] = [
+    {
+      label: 'Criar novo',
+      icon: IconPlus,
+      onClick: () => console.log('create-new-product.triggered'),
+    },
+  ]
+
   return (
     <div className="p-4 lg:p-6">
       <DataTable
@@ -34,6 +47,7 @@ export const ProductContent: React.FC = () => {
         data={products}
         isLoading={isPending}
         filters={productFilters}
+        actions={actions}
       />
     </div>
   )

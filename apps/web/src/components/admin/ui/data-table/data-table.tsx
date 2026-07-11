@@ -27,14 +27,14 @@ import {
 import { Skeleton } from '@/components/ui/skeleton'
 import { DataTablePagination } from './pagination'
 import { DataTableToolbar } from './toolbar'
-import type { DataTableFilterConfig } from './types'
+import type { DataTableActionConfig, DataTableFilterConfig } from './types'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   filters?: DataTableFilterConfig[]
+  actions?: DataTableActionConfig<TData>[]
   isLoading?: boolean
-  /** Quantidade de linhas fake exibidas durante o loading. Default: 10 */
   loadingRowCount?: number
 }
 
@@ -42,6 +42,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   filters,
+  actions,
   isLoading = false,
   loadingRowCount = 10,
 }: DataTableProps<TData, TValue>) {
@@ -86,7 +87,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="flex flex-col gap-4">
-      <DataTableToolbar table={table} filters={filters} />
+      <DataTableToolbar table={table} filters={filters} actions={actions} />
       <div className="overflow-hidden rounded-lg border">
         <Table>
           <TableHeader className="bg-muted">
