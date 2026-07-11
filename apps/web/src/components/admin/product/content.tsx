@@ -1,9 +1,9 @@
 'use client'
 
-import { Product } from '@/types/product.type'
 import { DataTable } from '../ui/data-table/data-table'
 import { DataTableFilterConfig } from '../ui/data-table/types'
 import { columns } from './columns'
+import { useFindProducts } from '@/hooks/use-find-products.hook'
 
 const productFilters: DataTableFilterConfig[] = [
   {
@@ -24,14 +24,17 @@ const productFilters: DataTableFilterConfig[] = [
   },
 ]
 
-type ProductContentProps = {
-  products: Product[]
-}
+export const ProductContent: React.FC = () => {
+  const { products, isPending } = useFindProducts()
 
-export const ProductContent: React.FC<ProductContentProps> = ({ products }) => {
   return (
     <div className="p-4 lg:p-6">
-      <DataTable columns={columns} data={products} filters={productFilters} />
+      <DataTable
+        columns={columns}
+        data={products}
+        isLoading={isPending}
+        filters={productFilters}
+      />
     </div>
   )
 }

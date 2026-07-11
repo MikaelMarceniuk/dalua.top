@@ -25,6 +25,9 @@ import {
 import { Product } from '@/types/product.type'
 import { deleteProductAction } from '@/components/actions/product/delete-product.action'
 import { toggleProductVisibilityAction } from '@/components/actions/product/toggle-product-visibility.action'
+import { useDeleteProduct } from '@/hooks/use-delete-product.hook'
+import { useUpdateProductAvailability } from '@/hooks/use-update-product-availability.hook'
+import { toast } from 'sonner'
 
 interface ProductActionsCellProps {
   product: Product
@@ -36,14 +39,34 @@ export const ProductActionsCell: React.FC<ProductActionsCellProps> = ({
   const router = useRouter()
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 
+  const { mutateAsync: deleteProduct, isPending: isDeleting } =
+    useDeleteProduct({
+      id: product.id,
+    })
+
+  const { mutateAsync: updateProductAvailability } =
+    useUpdateProductAvailability({
+      id: product.id,
+    })
+
   const canDelete = product.orderCount == 0
 
   const handleDelete = async () => {
-    await deleteProductAction({ id: product.id })
+    await deleteProduct(undefined, {
+      onSuccess: () =>
+        toast.success(`Produto "${product.name}" deletado com sucesso!`),
+      onError: () => {},
+    })
   }
 
   const handleAvailability = async () => {
-    await toggleProductVisibilityAction({ id: product.id })
+    await updateProductAvailability(undefined, {
+      onSuccess: () =>
+        toast.success(
+          `Disponibilidade do produto "${product.name}" atualizado com sucesso!`
+        ),
+      onError: () => {},
+    })
   }
 
   return (
@@ -99,8 +122,7 @@ export const ProductActionsCell: React.FC<ProductActionsCellProps> = ({
           <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
             <AlertDialogAction onClick={handleDelete}>
-              {/* {isDeleting ? 'Deletando...' : 'Deletar'} */}
-              Deletar
+              {isDeleting ? 'Deletando...' : 'Deletar'}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

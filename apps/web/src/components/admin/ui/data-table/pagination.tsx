@@ -18,10 +18,12 @@ import {
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>
+  isLoading?: boolean
 }
 
 export function DataTablePagination<TData>({
   table,
+  isLoading = false,
 }: DataTablePaginationProps<TData>) {
   return (
     <div className="flex items-center justify-between px-1">
@@ -69,7 +71,7 @@ export function DataTablePagination<TData>({
             className="size-8"
             size="icon"
             onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
+            disabled={isLoading || !table.getCanPreviousPage()}
           >
             <span className="sr-only">Página anterior</span>
             <IconChevronLeft />
@@ -79,7 +81,7 @@ export function DataTablePagination<TData>({
             className="size-8"
             size="icon"
             onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
+            disabled={isLoading || !table.getCanNextPage()}
           >
             <span className="sr-only">Próxima página</span>
             <IconChevronRight />
@@ -89,7 +91,7 @@ export function DataTablePagination<TData>({
             className="hidden size-8 lg:flex"
             size="icon"
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-            disabled={!table.getCanNextPage()}
+            disabled={isLoading || !table.getCanNextPage()}
           >
             <span className="sr-only">Última página</span>
             <IconChevronsRight />

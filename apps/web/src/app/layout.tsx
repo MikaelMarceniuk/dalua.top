@@ -2,6 +2,8 @@ import { Geist_Mono, Inter } from 'next/font/google'
 
 import './globals.css'
 import { cn } from '@/lib/utils'
+import { AppQueryClientProvider } from '@/components/providers/query-client.provider'
+import { Toaster } from '@/components/ui/sonner'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
@@ -26,7 +28,10 @@ export default function RootLayout({
         inter.variable
       )}
     >
-      <body>{children}</body>
+      <AppQueryClientProvider>
+        <body>{children}</body>
+      </AppQueryClientProvider>
+      <Toaster />
     </html>
   )
 }

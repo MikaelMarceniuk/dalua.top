@@ -10,7 +10,7 @@ export const toggleAvailabilityRoute = new Elysia()
   // .use(rolePlugin)
   .use(dbPlugin)
   .put(
-    '/:id',
+    '/availability/:id',
     async ({ db, params, status }) => {
       db.transaction(async (ctx) => {
         const productToUpdate = await db.query.products.findFirst({

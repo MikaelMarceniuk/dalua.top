@@ -24,6 +24,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Skeleton } from '@/components/ui/skeleton'
 import { DataTablePagination } from './pagination'
 import { DataTableToolbar } from './toolbar'
 import type { DataTableFilterConfig } from './types'
@@ -32,12 +33,17 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   filters?: DataTableFilterConfig[]
+  isLoading?: boolean
+  /** Quantidade de linhas fake exibidas durante o loading. Default: 10 */
+  loadingRowCount?: number
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   filters,
+  isLoading = false,
+  loadingRowCount = 10,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
@@ -61,6 +67,7 @@ export function DataTable<TData, TValue>({
       columnFilters,
       pagination,
     },
+    autoResetPageIndex: false,
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
@@ -74,6 +81,8 @@ export function DataTable<TData, TValue>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   })
+
+  const visibleColumnsCount = table.getVisibleLeafColumns().length
 
   return (
     <div className="flex flex-col gap-4">
@@ -101,7 +110,20 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {isLoading ? (
+              Array.from({ length: loadingRowCount }).map((_, rowIndex) => (
+                <TableRow key={`skeleton-${rowIndex}`}>
+                  {table.getVisibleLeafColumns().map((column) => (
+                    <TableCell
+                      key={column.id}
+                      style={{ width: column.getSize() }}
+                    >
+                      <Skeleton className="h-5 w-full max-w-[80%]" />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -123,7 +145,7 @@ export function DataTable<TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={columns.length}
+                  colSpan={visibleColumnsCount}
                   className="h-24 text-center"
                 >
                   Nenhum resultado encontrado.
@@ -133,7 +155,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table} isLoading={isLoading} />
     </div>
   )
 }
