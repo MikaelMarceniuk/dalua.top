@@ -4,6 +4,7 @@ import { findProductBySlugRoute } from './product/find-product-by-slug.route'
 import { createProductRoute } from './product/create-product.route'
 import { toggleAvailabilityRoute } from './product/toggle-availability.route'
 import { deleteProductRoute } from './product/delete-product.route'
+import { updateProductRoute } from './product/update-product.route'
 
 export const routes = new Elysia()
   .get('/', () => 'Hello World!')
@@ -12,6 +13,7 @@ export const routes = new Elysia()
       .use(findProductRoute)
       .use(findProductBySlugRoute)
       .use(createProductRoute)
+      .use(updateProductRoute)
       .use(toggleAvailabilityRoute)
       .use(deleteProductRoute),
   )

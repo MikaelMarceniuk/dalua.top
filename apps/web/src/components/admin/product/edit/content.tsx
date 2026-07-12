@@ -16,6 +16,8 @@ import { ContentForm } from './forms/content.form'
 import { useFindProductBySlug } from '@/components/admin/hooks/use-find-product-by-slug.hook'
 import { EditProductPageSkeleton } from './content.skeleton'
 import { useEffect } from 'react'
+import { useUpdateProduct } from '../../hooks/use-update-product.hook'
+import { toast } from 'sonner'
 
 interface EditProductPageContentProps {
   slug: string
@@ -27,6 +29,9 @@ export const EditProductPageContent = ({
   defaultValues,
 }: EditProductPageContentProps) => {
   const { product, isPending } = useFindProductBySlug({ slug })
+  const { updateProductMutation } = useUpdateProduct({
+    id: product?.id,
+  })
 
   const form = useForm({
     resolver: zodResolver(editProductFormSchema),
@@ -42,8 +47,15 @@ export const EditProductPageContent = ({
     },
   })
 
-  const submitHandler = form.handleSubmit((data) => {
-    console.log('EditProductPageContent.data: ', data)
+  const submitHandler = form.handleSubmit(async (data) => {
+    await updateProductMutation(
+      { data },
+      {
+        onSuccess: () => {
+          toast.success('Produto atualizado com sucesso!')
+        },
+      }
+    )
   })
 
   useEffect(() => {
@@ -80,14 +92,16 @@ export const EditProductPageContent = ({
             <ContentForm />
 
             <div className="sticky bottom-0 -mx-4 flex justify-end gap-2 border-t bg-background/95 px-4 py-4 backdrop-blur sm:-mx-6 sm:px-6">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => form.reset()}
-                disabled={form.formState.isSubmitting}
-              >
-                Descartar alterações
-              </Button>
+              {form.formState.isDirty && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => form.reset()}
+                  disabled={form.formState.isSubmitting}
+                >
+                  Descartar alterações
+                </Button>
+              )}
               <Button type="submit" disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting ? 'Salvando...' : 'Salvar produto'}
               </Button>
