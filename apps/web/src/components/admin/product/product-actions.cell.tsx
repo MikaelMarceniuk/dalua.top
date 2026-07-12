@@ -23,8 +23,6 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import { Product } from '@/types/product.type'
-import { deleteProductAction } from '@/components/actions/product/delete-product.action'
-import { toggleProductVisibilityAction } from '@/components/actions/product/toggle-product-visibility.action'
 import { useDeleteProduct } from '@/hooks/use-delete-product.hook'
 import { useUpdateProductAvailability } from '@/hooks/use-update-product-availability.hook'
 import { toast } from 'sonner'
@@ -63,7 +61,7 @@ export const ProductActionsCell: React.FC<ProductActionsCellProps> = ({
     await updateProductAvailability(undefined, {
       onSuccess: () =>
         toast.success(
-          `Disponibilidade do produto "${product.name}" atualizado com sucesso!`
+          `Disponibilidade do produto "${product.name}" atualizado para "${product.isAvailableForPurchase ? 'Indisponível' : 'Disponível'}" com sucesso!`
         ),
       onError: () => {},
     })
@@ -84,12 +82,14 @@ export const ProductActionsCell: React.FC<ProductActionsCellProps> = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-44">
           <DropdownMenuItem
-            onClick={() => router.push(`/admin/products/${product.id}`)}
+            onClick={() =>
+              router.push(`/admin/product/${product.slug}/details`)
+            }
           >
             Mais detalhes
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => router.push(`/admin/products/${product.id}/edit`)}
+            onClick={() => router.push(`/admin/product/${product.slug}/edit`)}
           >
             Editar
           </DropdownMenuItem>
