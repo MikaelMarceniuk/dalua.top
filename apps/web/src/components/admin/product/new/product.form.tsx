@@ -24,7 +24,10 @@ import {
   FieldLabel,
 } from '@/components/ui/field'
 import { formatCurrency } from '@/lib/utils'
-import { productFormSchema, ProductFormValues } from './product-form.schema'
+import {
+  productFormSchema,
+  ProductFormValues,
+} from '../schemas/product-form.schema'
 
 interface ProductFormProps {
   mode: 'create' | 'edit'

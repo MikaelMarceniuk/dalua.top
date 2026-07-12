@@ -9,6 +9,8 @@ import {
 import { columns } from './columns'
 import { useFindProducts } from '@/hooks/use-find-products.hook'
 import { IconPlus } from '@tabler/icons-react'
+import { CreateProductDialog } from './create-product/create-product.dialog'
+import { useState } from 'react'
 
 const productFilters: DataTableFilterConfig[] = [
   {
@@ -31,12 +33,14 @@ const productFilters: DataTableFilterConfig[] = [
 
 export const ProductContent: React.FC = () => {
   const { products, isPending } = useFindProducts()
+  const [isCreateProductDialogOpen, setCreateProductDialogOpen] =
+    useState(false)
 
   const actions: DataTableActionConfig<Product>[] = [
     {
       label: 'Criar novo',
       icon: IconPlus,
-      onClick: () => console.log('create-new-product.triggered'),
+      onClick: () => setCreateProductDialogOpen(true),
     },
   ]
 
@@ -48,6 +52,11 @@ export const ProductContent: React.FC = () => {
         isLoading={isPending}
         filters={productFilters}
         actions={actions}
+      />
+
+      <CreateProductDialog
+        isOpen={isCreateProductDialogOpen}
+        handleOpen={setCreateProductDialogOpen}
       />
     </div>
   )

@@ -20,6 +20,7 @@
     "react-dom": "^19.2.7",
     "react-email": "^6.6.9",
     "resend": "^6.17.2",
+    "slugify": "^1.6.9",
     "zod": "^4.4.3"
   },
   "devDependencies": {

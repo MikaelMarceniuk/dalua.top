@@ -1,6 +1,6 @@
 'use client'
 
-import { ProductFormValues } from '@/components/admin/product/new/product-form.schema'
+import { ProductFormValues } from '@/components/admin/product/schemas/product-form.schema'
 import { productKeys } from '@/components/query-keys/product.query-keys'
 import { api } from '@/lib/axios.lib'
 import { Product } from '@/types/product.type'

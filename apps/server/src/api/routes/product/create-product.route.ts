@@ -3,7 +3,7 @@ import { orderItems, products } from '@/db/schemas'
 import { authPlugin } from '@/plugins/auth.plugin'
 import { dbPlugin } from '@/plugins/db.plugin'
 import { rolePlugin } from '@/plugins/role.plugin'
-import { count, eq } from 'drizzle-orm'
+import { generateUniqueSlug } from '@/utils/generate-slug.utils'
 import { Elysia, t } from 'elysia'
 
 export const createProductRoute = new Elysia()
@@ -17,6 +17,7 @@ export const createProductRoute = new Elysia()
         .insert(products)
         .values({
           name: body.name,
+          slug: await generateUniqueSlug(body.name),
           description: body.description,
           priceInCents: body.priceInCents,
           isAvailableForPurchase: body.isAvailableForPurchase,
