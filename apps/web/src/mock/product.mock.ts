@@ -1,4 +1,4 @@
-import { Product } from '@/lib/store'
+import { Product } from '@/components/providers/store.provider'
 
 export const PRODUCTS: Product[] = [
   {

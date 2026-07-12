@@ -30,7 +30,7 @@ export const useCreateProduct = () => {
       return apiResult.data.product
     },
     onSuccess: () => {
-      queryClient.setQueryData<Product[]>(productKeys.find, (old) => {})
+      queryClient.invalidateQueries({ queryKey: productKeys.find })
     },
   })
 }

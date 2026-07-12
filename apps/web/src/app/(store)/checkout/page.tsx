@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useStore } from '@/components/store/providers/store.provider'
 import {
   IconArrowRight,
   IconLock,
@@ -11,6 +10,7 @@ import {
   IconPlus,
   IconShoppingBag,
 } from '@tabler/icons-react'
+import { useStore } from '@/components/providers/store.provider'
 
 const SHIPPING_OPTIONS = [
   { id: 'home', label: 'Home', address: '123 Serenity Lane, NY 10001' },
