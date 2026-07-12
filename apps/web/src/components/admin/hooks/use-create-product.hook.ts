@@ -3,7 +3,6 @@
 import { ProductFormValues } from '@/components/admin/product/schemas/product-form.schema'
 import { productKeys } from '@/components/admin/query-keys/product.query-keys'
 import { api } from '@/lib/axios.lib'
-import { Product } from '@/components/admin/types/product.type'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 type useCreateProductParams = {

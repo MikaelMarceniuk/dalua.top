@@ -72,7 +72,7 @@ export const CreateProductDialog: React.FC<CreateProductDialogProps> = ({
   useEffect(() => {
     if (isOpen) return
     form.reset()
-  }, [isOpen])
+  }, [isOpen, form])
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpen}>
