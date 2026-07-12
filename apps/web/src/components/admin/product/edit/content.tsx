@@ -13,7 +13,7 @@ import { BasicInfoForm } from './forms/basic-info.form'
 import { ImagesForm } from './forms/images.form'
 import { VariantsForm } from './forms/variants.form'
 import { ContentForm } from './forms/content.form'
-import { useFindProductBySlug } from '@/hooks/use-find-product-by-slug.hook'
+import { useFindProductBySlug } from '@/components/admin/hooks/use-find-product-by-slug.hook'
 import { EditProductPageSkeleton } from './content.skeleton'
 import { useEffect } from 'react'
 

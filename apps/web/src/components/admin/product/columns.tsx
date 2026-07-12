@@ -4,7 +4,7 @@ import { ColumnDef } from '@tanstack/react-table'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency } from '@/lib/utils'
 import { ProductActionsCell } from './product-actions.cell'
-import { Product } from '@/types/product.type'
+import { Product } from '@/components/admin/types/product.type'
 
 export const columns: ColumnDef<Product>[] = [
   {

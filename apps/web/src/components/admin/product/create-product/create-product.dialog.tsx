@@ -25,7 +25,7 @@ import { Input } from '@/components/ui/input'
 import { formatCurrency } from '@/lib/utils'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import { useCreateProduct } from '@/hooks/use-create-product.hook'
+import { useCreateProduct } from '@/components/admin/hooks/use-create-product.hook'
 import { toast } from 'sonner'
 
 type CreateProductDialogProps = {

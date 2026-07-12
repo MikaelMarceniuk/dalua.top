@@ -1,13 +1,13 @@
 'use client'
 
-import { Product } from '@/types/product.type'
+import { Product } from '@/components/admin/types/product.type'
 import { DataTable } from '../ui/data-table/data-table'
 import {
   DataTableActionConfig,
   DataTableFilterConfig,
 } from '../ui/data-table/types'
 import { columns } from './columns'
-import { useFindProducts } from '@/hooks/use-find-products.hook'
+import { useFindProducts } from '@/components/admin/hooks/use-find-products.hook'
 import { IconPlus } from '@tabler/icons-react'
 import { CreateProductDialog } from './create-product/create-product.dialog'
 import { useState } from 'react'

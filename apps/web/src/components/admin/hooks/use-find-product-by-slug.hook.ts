@@ -1,8 +1,8 @@
 'use client'
 
-import { productKeys } from '@/components/query-keys/product.query-keys'
+import { productKeys } from '@/components/admin/query-keys/product.query-keys'
 import { api } from '@/lib/axios.lib'
-import { ProductDetails } from '@/types/product-details.type'
+import { ProductDetails } from '@/components/admin/types/product-details.type'
 import { useQuery } from '@tanstack/react-query'
 
 type useFindProductBySlugParams = {
