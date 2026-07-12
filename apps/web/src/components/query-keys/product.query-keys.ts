@@ -1,5 +1,6 @@
 export const productKeys = {
   find: ['GET /product'] as const,
+  findBySlug: (slug: string) => ['GET /product/slug', slug] as const,
   create: ['POST /product'] as const,
   delete: (id: string) => ['DELETE /product', id] as const,
   updateAvailability: (id: string) =>

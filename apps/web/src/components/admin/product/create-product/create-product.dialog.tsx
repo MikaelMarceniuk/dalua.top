@@ -96,7 +96,7 @@ export const CreateProductDialog: React.FC<CreateProductDialogProps> = ({
                   {...field}
                   id={field.name}
                   aria-invalid={fieldState.invalid}
-                  placeholder="Ex: Shampoo restaurador 250ml"
+                  placeholder="Ex: Shampoo restaurador"
                   autoComplete="off"
                   autoFocus
                   disabled={isPending}

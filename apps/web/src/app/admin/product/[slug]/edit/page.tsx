@@ -1,3 +1,4 @@
+import { EditProductPageContent } from '@/components/admin/product/edit/content'
 import { AppHeader } from '@/components/admin/ui/app-header'
 
 type EditProductPageProps = {
@@ -10,7 +11,7 @@ const EditProductPage: React.FC<EditProductPageProps> = async ({ params }) => {
   const { slug } = await params
 
   return (
-    <main>
+    <div>
       <AppHeader
         items={[
           { label: 'Dashboard', href: '/admin/dashboard' },
@@ -19,7 +20,8 @@ const EditProductPage: React.FC<EditProductPageProps> = async ({ params }) => {
           { label: 'Edit' },
         ]}
       />
-    </main>
+      <EditProductPageContent slug={slug} />
+    </div>
   )
 }
 
