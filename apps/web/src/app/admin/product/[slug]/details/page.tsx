@@ -1,4 +1,5 @@
 import { AppHeader } from '@/components/admin/ui/app-header'
+import { InConstruction } from '@/components/admin/ui/in-construction'
 
 type ProductDetailsPageProps = {
   params: Promise<{
@@ -20,6 +21,10 @@ const ProductDetailsPage: React.FC<ProductDetailsPageProps> = async ({
           { label: slug, href: `/admin/product/${slug}/details` },
           { label: 'Details' },
         ]}
+      />
+      <InConstruction
+        title="Detalhes do produto"
+        description="A tela de detalhes do produto está em desenvolvimento."
       />
     </main>
   )
