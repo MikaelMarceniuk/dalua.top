@@ -4,6 +4,7 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['DEV', 'HOMOL', 'PRD']),
   PORT: z.coerce.number().optional().default(3333),
   ALLOWED_ORIGINS: z.url('ALLOWED_ORIGINS deve ser uma URL válida'),
+  API_URL: z.url('API_URL deve ser uma URL válida'),
 
   DATABASE_URL: z
     .url('DATABASE_URL deve ser uma URL válida')
