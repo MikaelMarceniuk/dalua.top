@@ -11,13 +11,19 @@ export const findProductBySlugRoute = new Elysia()
     async ({ db, params, status }) => {
       const productBySlug = await db.query.products.findFirst({
         where: (field, { eq }) => eq(field.slug, params.slug),
+        with: {
+          images: true,
+        },
       })
 
       if (!productBySlug) {
         return status(404, { message: 'Product not found' })
       }
 
-      return productDetailsPresenter({ product: productBySlug })
+      return productDetailsPresenter({
+        product: productBySlug,
+        images: productBySlug.images,
+      })
     },
     {
       // auth: true,

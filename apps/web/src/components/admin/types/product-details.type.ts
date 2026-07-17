@@ -5,4 +5,9 @@ export type ProductDetails = {
   description: string
   priceInCents: number
   isAvailableForPurchase: boolean
+  images: {
+    id: string
+    imageUri: string
+    isHighlighted: boolean
+  }[]
 }

@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { productImageSchema } from './product-image.schema'
 
 const variantOptionSchema = z.object({
   id: z.string().optional(),
@@ -25,16 +26,7 @@ export const editProductFormSchema = z.object({
     .int()
     .positive('Preço deve ser maior que zero'),
   isAvailableForPurchase: z.boolean(),
-  images: z
-    .array(
-      z.object({
-        id: z.string().optional(),
-        file: z.instanceof(File).optional(),
-        previewUrl: z.string().optional(),
-        isHighlighted: z.boolean(),
-      })
-    )
-    .default([]),
+  images: z.array(productImageSchema).default([]),
   variantTypes: z.array(variantTypeSchema).default([]),
   contentBlocks: z.array(contentBlockSchema).default([]),
 })

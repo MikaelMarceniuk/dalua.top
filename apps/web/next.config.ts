@@ -11,6 +11,20 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'dalua-dev.mmarceniuk.dev',
+        pathname: '/api/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dalua-dev.mmarceniuk.dev',
+        pathname: '/api/uploads/**',
+      },
+    ],
+  },
 }
 
 export default nextConfig

@@ -1,17 +1,14 @@
-import { Elysia, t } from 'elysia'
-import { randomUUID } from 'node:crypto'
-import { join } from 'node:path'
-import { optimizeImage } from '@/utils/optimize-image.utils'
-import { db } from '@/db'
-import { dbPlugin } from '@/plugins/db.plugin'
 import { PRODUCT_UPLOADS_DIR } from '@/constants/upload-dir.constant'
 import { productImages } from '@/db/schemas'
-import { env } from '@/config/env.config'
+import { dbPlugin } from '@/plugins/db.plugin'
 import { eq } from 'drizzle-orm'
+import Elysia, { t } from 'elysia'
+import { unlink } from 'node:fs/promises'
+import { basename, join } from 'node:path'
 
-export const updateProductImageRoute = new Elysia().use(dbPlugin).put(
+export const updateProductImageRoute = new Elysia().use(dbPlugin).patch(
   '/:id/image',
-  async ({ body, params, status }) => {
+  async ({ db, body, params, status }) => {
     const dbProduct = await db.query.products.findFirst({
       where: (fields, { eq }) => eq(fields.id, params.id),
     })
@@ -19,36 +16,44 @@ export const updateProductImageRoute = new Elysia().use(dbPlugin).put(
       return status(404, { message: 'Product not found' })
     }
 
-    const files = Array.isArray(body.images) ? body.images : [body.images]
-    await Promise.all(
-      files.map(async (file) => {
-        const optimizedBuffer = await optimizeImage(file)
-        const fileName = `${randomUUID()}.webp`
-        const filePath = join(PRODUCT_UPLOADS_DIR, fileName)
+    await db.transaction(async (ctx) => {
+      for (const img of body.images) {
+        if (img.action == 'keep') {
+          await ctx
+            .update(productImages)
+            .set({ isHighlighted: img.isHighlighted })
+            .where(eq(productImages.id, img.id))
+        }
 
-        await Bun.write(filePath, optimizedBuffer)
-        const imageUri = `${env.API_URL}/uploads/products/${fileName}`
+        if (img.action == 'delete') {
+          const pImage = await ctx.query.productImages.findFirst({
+            where: (fields, { eq }) => eq(fields.id, img.id),
+          })
+          if (!pImage) continue
 
-        await db.insert(productImages).values({
-          productId: dbProduct.id,
-          imageUri,
-        })
-      }),
-    )
+          const fileName = basename(pImage.imageUri)
+          const filePath = join(PRODUCT_UPLOADS_DIR, fileName)
+          await unlink(filePath)
+
+          await ctx.delete(productImages).where(eq(productImages.id, img.id))
+        }
+      }
+    })
 
     return status(204)
   },
   {
     body: t.Object({
-      images: t.Files({
-        maxSize: '8m',
-        type: ['image/jpeg', 'image/png', 'image/webp'],
-        minItems: 1,
-        maxItems: 10,
-      }),
+      images: t.Array(
+        t.Object({
+          kind: t.Literal('existing'),
+          id: t.String({ format: 'uuid' }),
+          imageUri: t.String(),
+          isHighlighted: t.Boolean(),
+          action: t.Union([t.Literal('keep'), t.Literal('delete')]),
+        }),
+      ),
     }),
-    params: t.Object({
-      id: t.String({ format: 'uuid' }),
-    }),
+    params: t.Object({ id: t.String({ format: 'uuid' }) }),
   },
 )

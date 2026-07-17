@@ -17,7 +17,9 @@ import { useFindProductBySlug } from '@/components/admin/hooks/use-find-product-
 import { EditProductPageSkeleton } from './content.skeleton'
 import { useEffect } from 'react'
 import { useUpdateProduct } from '../../hooks/use-update-product.hook'
-import { toast } from 'sonner'
+import { productImageParser } from './utils/product-image-parser.utils'
+import { useCreateProductImage } from '../../hooks/use-create-product-image.hook'
+import { useUpdateProductImage } from '../../hooks/use-update-product-image.hook'
 
 interface EditProductPageContentProps {
   slug: string
@@ -30,6 +32,12 @@ export const EditProductPageContent = ({
 }: EditProductPageContentProps) => {
   const { product, isPending } = useFindProductBySlug({ slug })
   const { updateProductMutation } = useUpdateProduct({
+    id: product?.id,
+  })
+  const { createProductImageMutation } = useCreateProductImage({
+    id: product?.id,
+  })
+  const { updateProductImageMutation } = useUpdateProductImage({
     id: product?.id,
   })
 
@@ -48,14 +56,21 @@ export const EditProductPageContent = ({
   })
 
   const submitHandler = form.handleSubmit(async (data) => {
-    await updateProductMutation(
-      { data },
-      {
-        onSuccess: () => {
-          toast.success('Produto atualizado com sucesso!')
-        },
-      }
-    )
+    await updateProductMutation({ data })
+
+    const newImgs = data?.images.filter((img) => img.kind == 'new')
+    if (newImgs.length > 0) {
+      await createProductImageMutation({
+        data: newImgs,
+      })
+    }
+
+    const existingImg = data?.images.filter((img) => img.kind == 'existing')
+    if (existingImg.length > 0) {
+      await updateProductImageMutation({
+        data: existingImg,
+      })
+    }
   })
 
   useEffect(() => {
@@ -66,7 +81,7 @@ export const EditProductPageContent = ({
       description: product.description,
       priceInCents: product.priceInCents,
       isAvailableForPurchase: product.isAvailableForPurchase,
-      images: [], // ainda não mapeado
+      images: product.images.map((image) => productImageParser({ image })),
       variantTypes: [], // ainda não mapeado
       contentBlocks: [], // ainda não mapeado
     })
