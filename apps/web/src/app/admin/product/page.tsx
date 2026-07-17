@@ -1,4 +1,4 @@
-import { ProductContent } from '@/components/admin/product/content'
+import { ProductContent } from '@/components/admin/pages/product/content'
 import { AppHeader } from '@/components/admin/ui/app-header'
 
 const ProductPage = () => {

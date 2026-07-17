@@ -2,7 +2,7 @@
 
 import { productKeys } from '@/components/admin/query-keys/product.query-keys'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { NewProductImage } from '../product/schemas/product-image.schema'
+import { NewProductImage } from '../pages/product/schemas/product-image.schema'
 import { api } from '@/lib/axios.lib'
 
 type useCreateProductImageHookParams = {

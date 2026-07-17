@@ -1,4 +1,4 @@
-import { EditProductPageContent } from '@/components/admin/product/edit/content'
+import { EditProductPageContent } from '@/components/admin/pages/product/edit/content'
 import { AppHeader } from '@/components/admin/ui/app-header'
 
 type EditProductPageProps = {

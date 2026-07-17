@@ -1,6 +1,6 @@
 'use client'
 
-import { ProductFormValues } from '@/components/admin/product/schemas/product-form.schema'
+import { ProductFormValues } from '@/components/admin/pages/product/schemas/product-form.schema'
 import { productKeys } from '@/components/admin/query-keys/product.query-keys'
 import { api } from '@/lib/axios.lib'
 import { useMutation, useQueryClient } from '@tanstack/react-query'

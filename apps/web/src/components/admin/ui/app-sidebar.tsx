@@ -50,21 +50,6 @@ const data = {
       url: '/admin/product',
       icon: <IconPackage />,
     },
-    {
-      title: 'Analytics',
-      url: '#',
-      icon: <IconChartBar />,
-    },
-    {
-      title: 'Projects',
-      url: '#',
-      icon: <IconFolder />,
-    },
-    {
-      title: 'Team',
-      url: '#',
-      icon: <IconUsers />,
-    },
   ],
   navClouds: [
     {
@@ -116,20 +101,15 @@ const data = {
   ],
   navSecondary: [
     {
-      title: 'Settings',
-      url: '#',
+      title: 'Integrações',
+      url: '/admin/integration',
       icon: <IconSettings />,
     },
-    {
-      title: 'Get Help',
-      url: '#',
-      icon: <IconHelp />,
-    },
-    {
-      title: 'Search',
-      url: '#',
-      icon: <IconSearch />,
-    },
+    // {
+    //   title: 'Settings',
+    //   url: '/admin/settigs',
+    //   icon: <IconSettings />,
+    // },
   ],
   documents: [
     {
