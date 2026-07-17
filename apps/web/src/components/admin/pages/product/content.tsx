@@ -7,7 +7,7 @@ import {
   DataTableFilterConfig,
 } from '../../ui/data-table/types'
 import { columns } from './columns'
-import { useFindProducts } from '@/components/admin/hooks/use-find-products.hook'
+import { useFindProducts } from '@/components/admin/pages/product/hooks/use-find-products.hook'
 import { IconPlus } from '@tabler/icons-react'
 import { CreateProductDialog } from './create-product/create-product.dialog'
 import { useState } from 'react'

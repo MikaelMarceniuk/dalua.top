@@ -4,7 +4,7 @@ import { ProductFormValues } from '@/components/admin/pages/product/schemas/prod
 import { productKeys } from '@/components/admin/query-keys/product.query-keys'
 import { api } from '@/lib/axios.lib'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { ProductDetails } from '../types/product-details.type'
+import { ProductDetails } from '../../../types/product-details.type'
 import { AxiosError } from 'axios'
 
 type useUpdateProductHookParams = {

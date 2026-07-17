@@ -23,8 +23,8 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import { Product } from '@/components/admin/types/product.type'
-import { useDeleteProduct } from '@/components/admin/hooks/use-delete-product.hook'
-import { useUpdateProductAvailability } from '@/components/admin/hooks/use-update-product-availability.hook'
+import { useDeleteProduct } from '@/components/admin/pages/product/hooks/use-delete-product.hook'
+import { useUpdateProductAvailability } from '@/components/admin/pages/product/hooks/use-update-product-availability.hook'
 import { toast } from 'sonner'
 
 interface ProductActionsCellProps {
