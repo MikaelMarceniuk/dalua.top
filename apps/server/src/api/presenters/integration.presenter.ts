@@ -6,7 +6,8 @@ export const integrationPresenter = ({
   ...integration
 }: integrationPresenterParams) => ({
   id: integration.id,
-  type: integration.type,
+  group: integration.group,
   provider: integration.provider,
+  connectionType: integration.connectionType,
   isConnected: integration.isConnected,
 })

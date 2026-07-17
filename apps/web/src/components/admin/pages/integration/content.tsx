@@ -1,40 +1,16 @@
 'use client'
 
+import React from 'react'
 import { Separator } from '@/components/ui/separator'
 import { IntegrationSection } from './components/integration-section'
-import { IconCreditCard, IconTruck } from '@tabler/icons-react'
-import { Integration } from './types/integration.type'
-
-const paymentIntegrations: Integration[] = [
-  {
-    id: 'mercado-pago',
-    name: 'Mercado Pago',
-    description:
-      'Receba pagamentos via Pix, boleto e cartão através do Mercado Pago.',
-    logo: '/integrations/mercado-pago.svg',
-    isConnected: true,
-  },
-  {
-    id: 'stripe',
-    name: 'Stripe',
-    description:
-      'Aceite pagamentos internacionais com cartão de crédito via Stripe.',
-    logo: '/integrations/stripe.svg',
-    isConnected: false,
-  },
-]
-
-const logisticsIntegrations: Integration[] = [
-  {
-    id: 'melhor-envio',
-    name: 'Melhor Envio',
-    description: 'Calcule fretes e gere etiquetas de envio automaticamente.',
-    logo: '/integrations/melhor-envio.svg',
-    isConnected: false,
-  },
-]
+import { integrationGroupEnum } from './types/integration.type'
+import { integrationGroupConfig } from './constants/integration-group.constants'
+import { IntegrationSectionSkeleton } from './components/integration-section.skeleton'
+import { useIntegration } from './integration-provider'
 
 export const IntegrationContent = () => {
+  const { integrations, isPendingIntegrations } = useIntegration()
+
   return (
     <div className="flex flex-col gap-8 p-4 lg:p-6">
       <div className="flex flex-col gap-1">
@@ -45,21 +21,38 @@ export const IntegrationContent = () => {
         </p>
       </div>
 
-      <IntegrationSection
-        icon={IconCreditCard}
-        title="Integrações de pagamento"
-        description="Escolha os provedores usados para processar pagamentos da sua loja."
-        integrations={paymentIntegrations}
-      />
+      {isPendingIntegrations
+        ? integrationGroupEnum.map((group, index) => {
+            const config = integrationGroupConfig[group]
+            return (
+              <React.Fragment key={group}>
+                {index > 0 && <Separator />}
+                <IntegrationSectionSkeleton
+                  icon={config.icon}
+                  title={config.title}
+                  description={config.description}
+                />
+              </React.Fragment>
+            )
+          })
+        : integrationGroupEnum.map((group, index) => {
+            const groupIntegrations = integrations?.[group]
+            if (!groupIntegrations?.length) return null
 
-      <Separator />
+            const config = integrationGroupConfig[group]
 
-      <IntegrationSection
-        icon={IconTruck}
-        title="Integrações de logística"
-        description="Configure serviços de frete e envio para seus pedidos."
-        integrations={logisticsIntegrations}
-      />
+            return (
+              <React.Fragment key={group}>
+                {index > 0 && <Separator />}
+                <IntegrationSection
+                  icon={config.icon}
+                  title={config.title}
+                  description={config.description}
+                  integrations={groupIntegrations}
+                />
+              </React.Fragment>
+            )
+          })}
     </div>
   )
 }

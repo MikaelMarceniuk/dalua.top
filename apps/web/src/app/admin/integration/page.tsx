@@ -1,6 +1,7 @@
 'use client'
 
 import { IntegrationContent } from '@/components/admin/pages/integration/content'
+import { IntegrationProvider } from '@/components/admin/pages/integration/integration-provider'
 import { AppHeader } from '@/components/admin/ui/app-header'
 
 export default function IntegrationsPage() {
@@ -12,7 +13,9 @@ export default function IntegrationsPage() {
           { label: 'Integrações' },
         ]}
       />
-      <IntegrationContent />
+      <IntegrationProvider>
+        <IntegrationContent />
+      </IntegrationProvider>
     </>
   )
 }
