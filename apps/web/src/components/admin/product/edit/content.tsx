@@ -16,10 +16,9 @@ import { ContentForm } from './forms/content.form'
 import { useFindProductBySlug } from '@/components/admin/hooks/use-find-product-by-slug.hook'
 import { EditProductPageSkeleton } from './content.skeleton'
 import { useEffect } from 'react'
-import { useUpdateProduct } from '../../hooks/use-update-product.hook'
 import { productImageParser } from './utils/product-image-parser.utils'
-import { useCreateProductImage } from '../../hooks/use-create-product-image.hook'
-import { useUpdateProductImage } from '../../hooks/use-update-product-image.hook'
+import { SubmitProgressOverlay } from './submit-steps-overlay'
+import { useProductEdit } from './hooks/use-product-edit.hook'
 
 interface EditProductPageContentProps {
   slug: string
@@ -31,14 +30,9 @@ export const EditProductPageContent = ({
   defaultValues,
 }: EditProductPageContentProps) => {
   const { product, isPending } = useFindProductBySlug({ slug })
-  const { updateProductMutation } = useUpdateProduct({
+  const { updateProduct, submitStep, skippedSteps } = useProductEdit({
     id: product?.id,
-  })
-  const { createProductImageMutation } = useCreateProductImage({
-    id: product?.id,
-  })
-  const { updateProductImageMutation } = useUpdateProductImage({
-    id: product?.id,
+    slug,
   })
 
   const form = useForm({
@@ -55,23 +49,9 @@ export const EditProductPageContent = ({
     },
   })
 
-  const submitHandler = form.handleSubmit(async (data) => {
-    await updateProductMutation({ data })
-
-    const newImgs = data?.images.filter((img) => img.kind == 'new')
-    if (newImgs.length > 0) {
-      await createProductImageMutation({
-        data: newImgs,
-      })
-    }
-
-    const existingImg = data?.images.filter((img) => img.kind == 'existing')
-    if (existingImg.length > 0) {
-      await updateProductImageMutation({
-        data: existingImg,
-      })
-    }
-  })
+  const submitHandler = form.handleSubmit(
+    async (data) => await updateProduct(data)
+  )
 
   useEffect(() => {
     if (!product) return
@@ -124,6 +104,10 @@ export const EditProductPageContent = ({
           </div>
         </form>
       </FormProvider>
+      <SubmitProgressOverlay
+        currentStep={submitStep}
+        skippedSteps={skippedSteps}
+      />
     </main>
   )
 }
