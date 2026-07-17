@@ -3,8 +3,10 @@ import z from 'zod'
 const envSchema = z.object({
   NODE_ENV: z.enum(['DEV', 'HOMOL', 'PRD']),
   PORT: z.coerce.number().optional().default(3333),
+
   ALLOWED_ORIGINS: z.url('ALLOWED_ORIGINS deve ser uma URL válida'),
   API_URL: z.url('API_URL deve ser uma URL válida'),
+  FRONTEND_URL: z.string().min(1, 'FRONTEND_URL deve ser uma string válida'),
 
   DATABASE_URL: z
     .url('DATABASE_URL deve ser uma URL válida')
@@ -15,9 +17,6 @@ const envSchema = z.object({
 
   BETTER_AUTH_SECRET: z.string().min(1, 'BETTER_AUTH_SECRET muito curta'),
   BETTER_AUTH_URL: z.url('BETTER_AUTH_URL deve ser uma URL válida'),
-  BETTER_AUTH_FRONTEND_DOMAIN: z
-    .string()
-    .min(1, 'BETTER_AUTH_FRONTEND_DOMAIN deve ser uma string válida'),
 
   RESEND_API_KEY: z
     .string()

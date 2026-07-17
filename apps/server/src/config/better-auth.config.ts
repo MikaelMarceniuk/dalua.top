@@ -44,6 +44,6 @@ export const auth = betterAuth({
       maxAge: 60 * 5, // cache de 5 min no cookie
     },
   },
-  trustedOrigins: [env.BETTER_AUTH_FRONTEND_DOMAIN],
+  trustedOrigins: [env.ALLOWED_ORIGINS],
   basePath: '/api/auth',
 })
