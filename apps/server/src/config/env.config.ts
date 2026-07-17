@@ -8,6 +8,10 @@ const envSchema = z.object({
   API_URL: z.url('API_URL deve ser uma URL válida'),
   FRONTEND_URL: z.string().min(1, 'FRONTEND_URL deve ser uma string válida'),
 
+  CREDENTIALS_ENCRYPTION_KEY: z
+    .string()
+    .min(64, 'CREDENTIALS_ENCRYPTION_KEY deve ser uma string válida'),
+
   DATABASE_URL: z
     .url('DATABASE_URL deve ser uma URL válida')
     .refine(

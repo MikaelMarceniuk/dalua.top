@@ -7,6 +7,8 @@ import { toggleAvailabilityRoute } from './product/toggle-availability.route'
 import { updateProductRoute } from './product/update-product.route'
 import { updateProductImageRoute } from './product/update-product-images.route'
 import { deleteProductRoute } from './product/delete-product.route'
+import { findIntegrationsRoute } from './integrations/find-integrations.route'
+import { connectIntegrationRoute } from './integrations/connect-integration.route'
 
 export const routes = new Elysia()
   .get('/', () => 'Hello World!')
@@ -20,4 +22,7 @@ export const routes = new Elysia()
       .use(updateProductImageRoute)
       .use(toggleAvailabilityRoute)
       .use(deleteProductRoute),
+  )
+  .group('/integration', (app) =>
+    app.use(findIntegrationsRoute).use(connectIntegrationRoute),
   )
