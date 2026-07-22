@@ -1,14 +1,11 @@
+import { relations } from 'drizzle-orm'
 import { pgTable, uuid, text, boolean, timestamp } from 'drizzle-orm/pg-core'
-
-export const integrationProviderEnum = ['mercado_pago', 'melhor_envio'] as const
-export type IntegrationProvider = (typeof integrationProviderEnum)[number]
-
-export const integrationGroupEnum = ['payment', 'logistic'] as const
-export type IntegrationGroup = (typeof integrationGroupEnum)[number]
-
-export const integrationConnectionTypeEnum = ['api-key', 'oauth'] as const
-export type IntegrationConnectionType =
-  (typeof integrationConnectionTypeEnum)[number]
+import { integrationFieldDefinition } from './integration-field-definition.schema'
+import {
+  integrationConnectionTypeEnum,
+  integrationGroupEnum,
+  integrationProviderEnum,
+} from '../enums/integration.enums'
 
 export const integration = pgTable('integration', {
   id: uuid('id')
@@ -23,6 +20,7 @@ export const integration = pgTable('integration', {
     enum: integrationConnectionTypeEnum,
   }).notNull(),
   encryptedCredentials: text('encrypted_credentials'),
+  tokenExpiresAt: timestamp('token_expires_at'), // específico de oauth2
 
   isConnected: boolean('is_connected').notNull().default(false),
   connectedAt: timestamp('connected_at'),
@@ -33,6 +31,10 @@ export const integration = pgTable('integration', {
     .defaultNow()
     .$onUpdate(() => new Date()),
 })
+
+export const integrationRelations = relations(integration, ({ many }) => ({
+  fieldDefinitions: many(integrationFieldDefinition),
+}))
 
 export type Integration = typeof integration.$inferSelect
 export type NewIntegration = typeof integration.$inferInsert
