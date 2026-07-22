@@ -9,6 +9,7 @@ import { updateProductImageRoute } from './product/update-product-images.route'
 import { deleteProductRoute } from './product/delete-product.route'
 import { findIntegrationsRoute } from './integrations/find-integrations.route'
 import { connectIntegrationRoute } from './integrations/connect-integration.route'
+import { findIntegrationFieldsRoute } from './integrations/find-integration-field.route'
 
 export const routes = new Elysia()
   .get('/', () => 'Hello World!')
@@ -24,5 +25,8 @@ export const routes = new Elysia()
       .use(deleteProductRoute),
   )
   .group('/integration', (app) =>
-    app.use(findIntegrationsRoute).use(connectIntegrationRoute),
+    app
+      .use(findIntegrationsRoute)
+      .use(connectIntegrationRoute)
+      .use(findIntegrationFieldsRoute),
   )
