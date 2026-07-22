@@ -1,7 +1,6 @@
 import Elysia from 'elysia'
 import { dbPlugin } from './db.plugin'
 import { apiKeyProviders } from '@/lib/integrations/api-key-providers'
-import { OAuthProviders } from '@/lib/integrations/oauth-providers'
 import { IntegrationProvider } from '@/db/enums/integration.enums'
 
 export const integrationPlugin = new Elysia({
@@ -21,9 +20,7 @@ export const integrationPlugin = new Elysia({
       return status(404, { message: 'Provider not supported' })
     }
 
-    const integrationProvider =
-      apiKeyProviders[dbIntegration.provider] ||
-      OAuthProviders[dbIntegration.provider]
+    const integrationProvider = apiKeyProviders[dbIntegration.provider]
     if (!integrationProvider) {
       return status(404, { message: 'Provider not supported' })
     }
