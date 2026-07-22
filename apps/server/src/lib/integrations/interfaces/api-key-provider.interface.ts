@@ -1,11 +1,6 @@
-import { IntegrationProvider } from '@/db/schemas'
+import { IntegrationProvider } from '@/db/enums/integration.enums'
 
-type validateCredentialsParams = {
-  accessToken: string
-  publicKey: string
-}
-
-type validateCredentialReturn = {
+type ValidateCredentialsReturn = {
   isValid: boolean
   error?: string
 }
@@ -13,6 +8,6 @@ type validateCredentialReturn = {
 export interface ApiKeyIntegrationProvider {
   provider: IntegrationProvider
   validateCredentials: (
-    credentials: validateCredentialsParams,
-  ) => Promise<validateCredentialReturn>
+    credentials: Record<string, string>,
+  ) => Promise<ValidateCredentialsReturn>
 }
