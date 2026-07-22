@@ -1,3 +1,5 @@
+'use client'
+
 import { integrationKeys } from '@/components/admin/query-keys/integration.query-keys'
 import { api } from '@/lib/axios.lib'
 import { useQuery } from '@tanstack/react-query'

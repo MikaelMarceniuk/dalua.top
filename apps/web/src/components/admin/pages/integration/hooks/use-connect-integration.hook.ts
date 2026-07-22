@@ -1,3 +1,5 @@
+'use client'
+
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ConnectIntegrationValues } from '../schemas/connect-integration.schema'
 import { api } from '@/lib/axios.lib'
